@@ -1,0 +1,113 @@
+#!/bin/csh -f
+setenv LD_LIBRARY_PATH 
+
+#setenv DISPLAY
+
+unset noclobber
+umask 002
+set autologout
+
+unalias ls
+alias ls "ls --color=tty"
+
+#bind keys
+bindkey '\e[1~' beginning-of-line      # Home
+bindkey '\e[3~' delete-char            # Delete
+bindkey '\e[4~' end-of-line            # End
+bindkey "^W" backward-delete-word      # Delete
+bindkey -k up history-search-backward  # PageUp
+bindkey -k down history-search-forward # PageDown
+
+#set prompt
+if ( $?prompt ) then
+     if ( "$uid" == "0" ) then    
+     set prompt = "%U%n%u@%m [%l] %B%~%b # "
+     else
+         set prompt = "%U%n%u@%m [%l] %B%~%b % "
+     endif
+endif
+
+set cr = "%{\e[31m%}" #red
+set cg = "%{\e[32m%}" #green
+set c0 = "%{\e[0m%}"  #default
+
+# Set some variables for interactive shells
+#if ( $?prompt ) then
+  if ( "$uid" == "0" ) then
+    set prompt = "%B%U%n%u@%m.$cr%l$c0%b %c2 %B%#%b " 
+  else
+    set prompt = "%B%U%n%u@%m.$cg%l$c0%b %c2 %B%%%b "
+  endif
+#endif
+
+#ls colorful
+setenv LSCOLORS ExGxFxdxCxegedabagExEx
+setenv CLICOLOR yes
+
+#Tab to autolist
+set autolist
+set correct = cmd
+
+setenv PATH /usr/local/bin:/bin:/usr/bin
+setenv QMAKESPEC /home/lib/qt4.7/mkspecs/linux-g++
+source .cshrc-common
+
+alias sshFOX "/home/xyzhang/scripts/ssh -X xyzhang@192.168.35.236"
+alias rFOX "rlogin 192.168.35.236"
+alias ssh "/home/xyzhang/scripts/ssh"
+
+
+alias jad "/home/xyzhang/4students/jad/jad "
+setenv XILINX /tool/edanew/xilinx/ise/14.7/ISE_DS/ISE
+#jar -cvfMO project.jar ./
+#jar -xvf project.jar
+
+#svn merge -c -303 ^/calc/trunk
+#--- Reverse-merging r303 into 'integer.c':
+setenv BOOST_INCLUDE_DIR /home/fpga/lib/boost-1.58/include
+setenv BOOST_LIB_DIR /home/fpga/lib/boost-1.58/lib
+
+
+alias svnup "svn up [a-s]* tools .qmake*"
+alias k7bitgen 'bitgen -intstyle ise  -b -d -l -g UnconstrainedPins:Allow -w '
+set prompt='[%n@%m%/]'
+
+alias svnst 'svn st | grep -v .nfs0000 | grep -v _msg.cc | grep -v _msg_ids.h | grep -v elease | grep -v ebug | grep -v kefile | grep -v uic | grep -v moc'
+alias svnci 'source /home/scripts/svnci.sh'
+alias svnok 'svn resolved'
+
+source /home/fpga/.cshrc-qt5
+alias rar '/home/fpga/lib/rar/rar'
+
+alias mkd "make -j8 debug"
+alias mk "make -j8"
+
+alias g 'gvim'
+alias .. "cd .."
+alias ... "cd ../../"
+
+alias ipcmp '$HOME/tool/compare.sh' 
+setenv  PATH /home/jlyang/tool/valgrind/bin:/home/jlyang/tool/bin:${PATH}
+alias my_style "astyle --pad-header --align-pointer=type --indent=spaces=2 --attach-namespaces --attach-classes --max-code-length=200 --style=google --indent-classes --indent-col1-comments --min-conditional-indent=2 --pad-oper --pad-comma"
+alias cleanupCoregen '$HOME/workspace/ipcore/scripts/IPgencleanup.bash'
+
+alias ll 'ls -lrt'
+set v7="xc7vx690tffg1761-3"
+set k7="xc7k325tffg1761-3"
+alias agrep /home/jlyang/tool/bin/agrep
+
+alias gg 'gnome-open ./'
+
+setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:"/home/xnli/tools/protobuf-3.9.0/lib":"/home/fpga/lib/boost_1_64_0/lib"
+
+alias gradle /home/fpga/tools/gradle/gradle-5.6.3/bin/gradle
+setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/home/fpga/lib/boost_1_68_0/lib
+
+alias procise '/export/home1/user/xyzhang/workspace/fpga_v9/procise/bin/Linux_64/procise'
+alias procise_db '/export/home1/user/xyzhang/workspace/fpga_v9/db_tools/bin/Linux_64/procise'
+source /home/fpga/.cshrc-qt5 ;#source /home/xnli/.cshrc-v4
+
+alias python3 /home/xnli/tools/python3.6/bin/python3.6
+alias clion /export/home1/user/xyzhang/workspace/clion-2018.1.1/bin/clion.sh
+alias cmake /home/fpga/tools/cmake-3.3.2/bin/cmake
+setenv LD_LIBRARY_PATH  /home/fpga/lib/boost_1_64_0/lib:${LD_LIBRARY_PATH}

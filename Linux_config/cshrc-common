@@ -1,0 +1,96 @@
+#!/bin/csh -f
+#system
+setenv LBITS `getconf LONG_BIT`
+setenv SYSNAME `/home/public/sysname`
+setenv LINUX_PLATFORM ${SYSNAME}_${LBITS}
+set MAKEFLAGS=-j8
+
+#TCL & QT
+setenv TCL_HOME /home/lib/tcl8.4
+setenv QT_HOME /home/lib/qt-5.8.0
+setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/home/lib/qt-5.8.0/lib
+
+#gtest
+setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/usr/lib64:/usr/local/gtest-1.6.0/lib/.libs
+setenv SVN_EDITOR vi
+
+#flex
+setenv PATH /home/lib/flex-2.5.35/bin:${PATH}
+
+#gcc & gdb
+setenv PATH /home/lib/gcc-4.4.3/bin:${PATH}
+setenv PATH /home/lib/gdb-6.8/bin:${PATH}
+setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/home/lib/gcc44_lib/gmp-4.3.2/lib:/home/lib/gcc44_lib/mpc-0.8.1/lib:/home/lib/gcc44_lib/mpfr-2.4.2/lib
+
+#ictime
+setenv USER `whoami`
+setenv ICTIME_HOME /home/lib/ictime
+setenv TCL_LIBRARY /home/lib/ictime/devpkgs/TCL/lib/tcl8.4
+setenv LD_LIBRARY_PATH /home/lib/ictime/devpkgs/lib:/home/lib/ictime/devpkgs/TCL/lib:${LD_LIBRARY_PATH}
+
+#work-torc
+setenv BOOST_INCLUDE_DIR /home/lib/boost-1.58/include
+setenv BOOST_LIB_DIR /home/lib/boost-1.58/lib
+setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/home/lib/boost-1.58/lib
+
+#cppcheck
+setenv PATH /home/lib/cppcheck-1.68/bin:/home/lib/qt4/bin:${PATH}
+alias cppcheck-gui 'setenv LD_LIBRARY_PATH /home/lib/gcc-4.92/lib:/home/lib/gcc-4.92/lib64:${LD_LIBRARY_PATH}; /home/lib/cppcheck-1.68/bin/cppcheck-gui'
+
+###QT5
+
+#alias
+#alias svn '/usr/bin/svn'
+alias a 'alias'
+alias v 'vi'
+alias l 'ls -alF'
+alias du 'du -hs'
+alias lf 'ls -FCa'
+alias la 'ls -la'
+alias ll 'ls -lt'
+alias rd 'rmdir'
+alias md 'make debug'
+alias c 'clear'
+alias s 'source'
+alias f 'find . -name \!* -print'
+alias g 'grep'
+alias h 'history'
+alias i 'whoami'
+alias m 'more'
+alias t 'tcsh'
+alias k 'make'
+alias j 'make clean; make -j 4; make'
+alias mc 'make clean'
+alias xt 'xterm -geometry 80x25 -ls -mb -sb -sf -bg black -fg green &'
+alias wxt 'xterm -ls -mb -sb -sf -fg black &'
+alias ye 'xterm -geometry 80x25 -ls -mb -sb -sf -bg black -fg yellow &'
+alias rm 'rm -i -f'
+alias h 'history'
+alias man 'man -F'
+alias igrep 'find . -name "*" -exec grep -nHi \!:1 {} \;'
+alias agrep 'find . -type f -exec grep -inH $1 {} \; | grep -v Binary | grep -v ".svn"
+alias cgrep '/home/scripts/cgrep'
+alias hgrep '/home/scripts/hgrep'
+alias addu '/home/scripts/createUser'
+alias cleanall 'find . -name "*.o" | xargs rm -rf'
+alias mytag 'ctags -R `find . -name "*.cc" -o -name "*.h" -o -name "*.c"`'
+alias debug 'make OPTMODE=dbg'
+alias lss 'ls -l  \!* | awk '\''{print $5 "\t" $9}'\'''
+alias xpdf1 'evince'
+
+alias vncs 'vncserver -alwaysshared -geometry 1920x1080'
+alias vncs2 'vnc4server -alwaysshared -geometry 1260x946'
+#tools
+alias tkdiff '/home/lib/tkdiff'
+alias cgdb '/home/tools/cgdb-0.7.0/bin/cgdb'
+alias emacs '/home/lib/emacs-23.1/bin/emacs'
+
+alias svndiff 'svn diff --diff-cmd /home/lib/tkdiff'
+alias purify "valgrind --tool=memcheck --leak-check=full --show-reachable=yes ./nimbus-debug"
+alias svnm 'svn st | grep -v "^?" | grep -v "\.a"'
+alias psroot 'ps -fu root | grep nimbus'
+alias rmlog 'rm procise_[1-9][0-9].log'
+
+alias sshmatrix 'ssh 192.168.35.231'
+alias runssh 'ssh -o StrictHostKeyChecking=no 192.168.35.231 "bash /home/xyzhang/scripts/ssh_regression.sh $1"'
+

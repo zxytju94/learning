@@ -1,0 +1,20 @@
+#! /bin/bash
+
+# find grammer:
+# find   path   -option   [   -print ]   [ -exec   -ok   command ]   {} \;
+# "-name" option is refer to filename which search
+# "-exec" execute the args until ;
+# '-nH' is to add line index and the filename matched
+# '$1' is refer to the first args atach hgrep
+# '{ }' include the file found
+# '\;' is end flag of '-exec' 
+
+mygrep () {
+	find . -name "*.h" -exec grep -nH $1 {} \;
+	find . -name "*.hpp" -exec grep -nH $1 {} \;
+	find . -name "*.hxx" -exec grep -nH $1 {} \;
+	find . -name "*.inc" -exec grep -nH $1 {} \;
+}
+IFS="
+"
+mygrep $1

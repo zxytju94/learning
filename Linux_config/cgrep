@@ -1,0 +1,11 @@
+#! /bin/bash
+cgrep () {
+	find . -name "*.cc" -exec grep -niH $1 {} \;
+	find . -name "*.cpp" -exec grep -niH $1 {} \;
+	find . -name "*.c" -exec grep -niH $1 {} \;
+	find . -name "*.cxx" -exec grep -niH $1 {} \;
+}
+
+IFS="
+"
+cgrep $1
