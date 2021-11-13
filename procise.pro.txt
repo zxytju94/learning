@@ -1,0 +1,22 @@
+!include( $$top_srcdir/common.pri ) {
+  error( "Couldn't find the common.pri file!" )
+}
+
+TEMPLATE = subdirs
+CONFIG += ordered
+
+### NOTE: it seems that .depends does not work for VS projects
+
+for(module, MODULES) {
+  exists(src/$${module}) {
+    SUBDIRS += src/$${module}
+  }
+}
+
+# main depends on sub modules:
+SUBDIRS += src/main
+for(module, MODULES) {
+  exists(src/$${module}) {
+    main.depends += $${module}
+  }
+}

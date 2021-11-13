@@ -1,0 +1,35 @@
+cmake_minimum_required(VERSION 3.10)
+
+project(procise)
+
+cmake_policy(SET CMP0053 NEW)
+
+set(CMAKE_CXX_STANDARD 11)
+set(ROOT_DIR .)
+
+set(ROOT_DIR ${PROJECT_SOURCE_DIR})
+set(CMAKE_MODULE_PATH "${ROOT_DIR}")
+include(common)
+
+add_subdirectory(${ROOT_DIR}/src/bitstream)
+add_subdirectory(${ROOT_DIR}/src/common)
+add_subdirectory(${ROOT_DIR}/src/dcp)
+add_subdirectory(${ROOT_DIR}/src/design)
+add_subdirectory(${ROOT_DIR}/src/device)
+#add_subdirectory(${ROOT_DIR}/src/device2)
+#add_subdirectory(${ROOT_DIR}/src/edif)
+add_subdirectory(${ROOT_DIR}/src/gui)
+add_subdirectory(${ROOT_DIR}/src/io)
+add_subdirectory(${ROOT_DIR}/src/proto)
+add_subdirectory(${ROOT_DIR}/src/tcl)
+add_subdirectory(${ROOT_DIR}/src/utility)
+add_subdirectory(${ROOT_DIR}/src/netlist)
+add_subdirectory(${ROOT_DIR}/src/constraints)
+#add_subdirectory(${ROOT_DIR}/src/program)
+add_subdirectory(${ROOT_DIR}/src/xicom_hw)
+add_subdirectory(${ROOT_DIR}/src/labtools)
+
+#link_directories(/home/fpga/lib/boost_1_64)
+aux_source_directory(./src/main/ DIR_SRCS)
+add_executable(${PROJECT_NAME} ${DIR_SRCS})
+#target_link_libraries(${PROJECT_NAME}  Qt5::Core Qt5::Gui Qt5::Qml Qt5::Quick Qt5::Widgets Qt5::Charts)

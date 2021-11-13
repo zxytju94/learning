@@ -1,0 +1,68 @@
+!include( $$top_srcdir/common.pri ) {
+  error( "Couldn't find the common.pri file!" )
+}
+!include( $$top_srcdir/src/src_common.pri ) {
+  error( "Couldn't find the src_common.pri file!" )
+}
+
+#!include( $$top_srcdir/src/make_msg.pri ) {
+#  error( "Couldn't find the make_msg.pri file!" )
+#}
+#include( $$top_srcdir/src/analyze.pri )
+
+TEMPLATE = lib
+CONFIG += staticlib
+
+unix {
+  QMAKE_CXXFLAGS -= -Werror
+}
+
+head_dir = $$top_srcdir/include/labtools
+#head_dir = $$top_srcdir/include/xicom_hw
+INCLUDEPATH += $$top_srcdir/include/xicom_hw
+
+
+HEADERS += $$head_dir/LTDHWTool.h \
+           $$head_dir/LTDHWCSE.h \
+           $$head_dir/LTDHWXsdb.h \
+           $$head_dir/LTDHWIBERT.h \
+           $$head_dir/LTDHWBitstream.h \
+           $$head_dir/LTDHWServerTarget.h \
+           $$head_dir/LTDCfgMem.h \
+           $$head_dir/LTDFeatures.h \
+           $$head_dir/LTDHWJtag.h \
+           $$head_dir/LTDHWLink.h \
+           $$head_dir/LTDHWRX.h \
+           $$head_dir/LTDHWTX.h \
+           $$head_dir/LTDHWPLL.h \
+           $$head_dir/LTDHWGT.h \
+           $$head_dir/LTDParam.h \
+           $$head_dir/LTDHWScan.h \
+           $$head_dir/LTDHWEyeSlicer.h \
+           $$head_dir/LTDHWSweep.h \
+           $$head_dir/LTDHWConfigGTsGtr.H  \
+
+
+
+SOURCES += LTDHWCSE.cc \
+           LTDHWXsdb.cc \
+           LTDHWIBERT.cc \
+           LTDHWTool.cc \
+           LTDHWBitstream.cc \
+           LTDHWServerTarget.cc \
+           LTDCfgMem.cc \
+           LTDFeatures.cc \
+           LTDHWJtag.cc \
+           LTDHWLink.cc \
+           LTDHWRX.cc \
+           LTDHWTX.cc \
+           LTDHWPLL.cc \
+           LTDHWGT.cc \
+           LTDParam.cc \
+           LTDHWScan.cc \
+           LTDHWEyeSlicer.cc \
+           LTDHWSweep.cc \
+           LTDHWConfigGTsGtr.cc
+
+
+
